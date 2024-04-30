@@ -1,0 +1,23 @@
+{
+  "name": "bibliotheca",
+  "version": "0.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "dev": "node --env-file=.env app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Karitchi/bibliotheca.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Karitchi/bibliotheca/issues"
+  },
+  "homepage": "https://github.com/Karitchi/bibliotheca#readme",
+  "type": "module",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
