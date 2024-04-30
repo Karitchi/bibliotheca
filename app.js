@@ -1,6 +1,9 @@
 import express from "express";
 import indexRouter from "./routes/index.js";
 import booksRouter from "./routes/books.js";
+import connectToDB from "./utils/DBConnection.js";
+
+await connectToDB();
 
 const app = express();
 
