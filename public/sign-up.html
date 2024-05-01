@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bibliotheca</title>
+  </head>
+  <body>
+    <header>
+      <a href="/" class="brand">
+        <h1>Bibliotheca</h1>
+      </a>
+    </header>
+
+    <main>
+      <section class="sign-up-container">
+        <h2 class="welcome">Welcome to Bibliotheca</h2>
+        <h3 class="sign-up-title">sign-up</h3>
+
+        <form action="/sign-up" method="post" class="sign-up-form">
+          <label for="username" class="sign-up-form-label">username</label>
+          <input
+            type="username"
+            id="username"
+            name="username"
+            required
+            class="sign-up-form-input"
+          />
+          <label for="email" class="sign-up-form-label">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            class="sign-up-form-input"
+          />
+
+          <label for="password" class="sign-up-form-label">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            required
+            class="sign-up-form-input"
+          />
+
+          <input type="submit" value="sign-up" class="sign-up-form-button" />
+        </form>
+
+        <div class="no-account-yet">
+          <p>Have an account?</p>
+          <a href="/sign-in class="sign-in-anchor">sign in</a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
