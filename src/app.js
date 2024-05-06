@@ -4,9 +4,9 @@ import * as db from "./utils/db.js";
 
 try {
   const NOW = await db.query("SELECT NOW()");
-  console.log("Connected to db", NOW.rows[0].now);
+  console.log("Database connection established successfully.");
 } catch (error) {
-  console.error("Error connecting db", error);
+  console.error("Failed to connect to the database:", error);
 }
 
 const app = express();

@@ -1,7 +1,13 @@
 import pg from "pg";
 const { Pool } = pg;
 
-const pool = new Pool();
+const pool = new Pool({
+  user: process.env.PGUSER || 'postgres',
+  host: process.env.PGHOST || '127.0.0.1',
+  database: process.env.PGDATABASE || 'postgres',
+  password: process.env.PGPASSWORD || 'postgres',
+  port: process.env.PGPORT || 5432
+});
 
 export const query = async (text, params) => {
   const start = Date.now();
