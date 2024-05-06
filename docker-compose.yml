@@ -1,26 +1,59 @@
+  # This Docker Compose file is used to define and manage the services required for the Bibliotheca application.
 name: bibliotheca
 services:
-  bibliotheca-node:
+  # The 'node.js' service is responsible for running the Node.js application.
+  # It builds the container using the 'node.dockerfile' and targets the 'dev' stage.
+  # The container is named 'bibliotheca-node.js' and is set to restart unless stopped.
+  # It exposes ports 3000 and 9229 on the host machine.
+  # The volumes are mounted to provide access to the source code, package files, and environment variables.
+  # It depends on the 'postgres' service and runs the command 'tail -f /dev/null'.
+  node.js:
+    container_name: bibliotheca-node.js
     build:
       context: .
       dockerfile: node.dockerfile
-    container_name: bibliotheca-node
-    working_dir: /app
-    volumes:
-      - .:/app
+      target: dev
+    restart: unless-stopped
     ports:
-      - "${NODE_PORT:-3000}:${NODE_PORT:-3000}"
-    command: tail -f /dev/null
+      - 127.0.0.1:3000:3000
+      - 127.0.0.1:9229:9229
+    volumes:
+      - ./src:/app/src
+      - ./package.json:/app/package.json
+      - ./package-lock.json:/app/package-lock.json
+      - ./.env:/app/.env
     depends_on:
-      - bibliotheca-postgres
+      postgres:
+        condition: service_healthy
+    command: tail -f /dev/null
 
-  bibliotheca-postgres:
+  # The 'postgres' service is responsible for running the PostgreSQL database.
+  # It builds the container using the 'postgres.dockerfile'.
+  # The container is named 'bibliotheca-postgres' and is set to restart unless stopped.
+  # The volume 'bibliotheca-postgres' is mounted to persist the database data.
+  # Environment variables are set for the PostgreSQL user, password, and database name.
+  # Port 5432 is exposed for external access.
+  # A health check is configured to test the availability of the PostgreSQL service.
+  postgres:
+    container_name: bibliotheca-postgres
     build:
       context: .
       dockerfile: postgres.dockerfile
-    container_name: bibliotheca-postgres
+    restart: unless-stopped
+    volumes:
+      - bibliotheca-postgres:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
-      POSTGRES_DB: ${POSTGRES_DB:-postgres}
-      POSTGRES_HOST_AUTH_METHOD: password
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    expose:
+      - 5432
+    healthcheck:
+      test: [ "CMD", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  bibliotheca-postgres:
+# This volume is used to persist the data for the PostgreSQL database.
