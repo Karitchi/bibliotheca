@@ -40,4 +40,4 @@ Bibliotheca is currently under development, but we're excited to bring it to you
 
 ## Developer Documentation:
 
-For detailed developer documentation, please refer to the [Wiki](wiki_link_here) of this repository. The wiki contains in-depth guides and information intended specifically for developers working on the Bibliotheca project.
+For detailed developer documentation, please refer to the [Wiki](https://github.com/Karitchi/bibliotheca/wiki) of this repository. The wiki contains in-depth guides and information intended specifically for developers working on the Bibliotheca project.
