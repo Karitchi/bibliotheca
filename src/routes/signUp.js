@@ -9,8 +9,13 @@ router.get("/", function (req, res, next) {
 });
 
 router.post("/", (req, res, next) => {
-  createAccount(req.body.username, req.body.email, req.body.password);
-  res.send("Account created");
+  try {
+    createAccount(req.body.email, req.body.password);
+  } catch (error) {
+    console.log("Error creating account:");
+    console.log(error.message);
+  }
+  res.send("Account created successfully");
 });
 
 export default router;
